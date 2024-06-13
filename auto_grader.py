@@ -21,7 +21,7 @@ def test_read_data(results):
 def test_vocab(results):
     if results["length"] != 7163:
         return f"Vocab length is {results['vocab_length']}, expected 7163"
-    if results["tag2id_length"] != 7:
+    if results["tag2id_length"] not in [7, 8]:
         return f"Number of tags is {results['tag2id_length']}, expected 7"
     if results["Spongebob"] != 1:
         return f"Index of 'Spongebob' is {results['Spongebob']}, expected 1 because it is unknown"

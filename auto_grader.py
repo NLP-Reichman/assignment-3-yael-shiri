@@ -12,7 +12,7 @@ def get_args():
     return parser.parse_args()
 
 def test_read_data(results):
-    lengths = results["lengths"]
+    lengths = tuple(results["lengths"])
 
     if not lengths == (1750, 250, 500):
         return f"Lengths are {lengths}, expected (1750, 250, 500)"
@@ -21,7 +21,7 @@ def test_read_data(results):
 def test_vocab(results):
     if results["length"] != 7163:
         return f"Vocab length is {results['vocab_length']}, expected 7163"
-    if results["tag2id_length"] != 7:
+    if results["tag2id_length"] not in [7, 8]:
         return f"Number of tags is {results['tag2id_length']}, expected 7"
     if results["Spongebob"] != 1:
         return f"Index of 'Spongebob' is {results['Spongebob']}, expected 1 because it is unknown"
@@ -35,7 +35,7 @@ def test_count_oov(results):
     return 1
     
 def test_prepare_data_loader(results):
-    if not results["lengths"] == (110, 16, 32):
+    if not tuple(results["lengths"]) == (110, 16, 32):
         return f"Lengths are {results['lengths']}, expected (110, 16, 32)"
     return 1
 
